@@ -21,7 +21,7 @@ public class Player1 {
 	private int FLOOR;
 
 	public Player1(int width, int height, int FLOOR) {
-		fh.setInputFolder("animation" + File.separator + "p1");
+		fh.setInputFolder("images" + File.separator + "animation" + File.separator + "p1");
 		try {
 			imageList = fh.loadMatchingImages("frame", 1, 100);
 		} catch (Exception e) {
@@ -114,8 +114,8 @@ public class Player1 {
 			break;
 		}
 	}
-	
-	private void chooseImage(int index){
+
+	private void chooseImage(int index) {
 		image = imageList.get(index);
 		playerWidth = image.getWidth(null);
 		playerHeight = image.getHeight(null);
