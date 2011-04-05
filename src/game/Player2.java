@@ -121,4 +121,8 @@ public class Player2 {
 		playerWidth = image.getWidth(null);
 		playerHeight = image.getHeight(null);
 	}
+	
+	private void requestAnimation(int animationID){
+		
+	}
 }

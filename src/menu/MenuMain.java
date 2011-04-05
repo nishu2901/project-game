@@ -17,17 +17,20 @@ import javax.swing.Timer;
 import fileHandling.FileHandler;
 import game.FightingGame;
 
-public class MenuMain extends JPanel implements ActionListener {
+public class MenuMain extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
 	private FightingGame parent;
 	private FileHandler fh;
-	private Timer timer;
+	private Thread timer;
 	private MenuButton buttonPlay;
 	private MenuButton buttonExit;
 	private int totalMenuItems;
 	private int selectedMenuItem;
 	private BufferedImage menuBackground;
 
+	private boolean threadSuspended;
+
+	private final int DELAY = 50;
 
 	public MenuMain(int width, int height, FightingGame parent) {
 		this.parent = parent;
@@ -36,9 +39,6 @@ public class MenuMain extends JPanel implements ActionListener {
 		setFocusable(true);
 		setBackground(Color.WHITE);
 		setDoubleBuffered(true);
-
-		timer = new Timer(5, this);
-		timer.start();
 
 		selectedMenuItem = 0;
 		totalMenuItems = 2;
@@ -53,7 +53,7 @@ public class MenuMain extends JPanel implements ActionListener {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		highlightMenuItem(selectedMenuItem);
 	}
 
@@ -68,11 +68,6 @@ public class MenuMain extends JPanel implements ActionListener {
 
 		Toolkit.getDefaultToolkit().sync();
 		g.dispose();
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		repaint();
 	}
 
 	public void menuUp() {
@@ -148,5 +143,59 @@ public class MenuMain extends JPanel implements ActionListener {
 			}
 		}
 	}
+
+	public void addNotify() {
+		super.addNotify();
+		timer = new Thread(this);
+		timer.start();
+	}
+
+	public void cycle() {
+		System.out.println("Cycling");
+	}
+
+	public void run() {
+		long beforeTime, timeDiff, sleep;
+
+		beforeTime = System.currentTimeMillis();
+
+		while (true) {
+			cycle();
+			repaint();
+
+			timeDiff = System.currentTimeMillis() - beforeTime;
+			sleep = DELAY - timeDiff;
+
+			if (sleep < 0) {
+				sleep = 2;
+			}
+			try {
+				Thread.sleep(sleep);
+
+				if (isThreadSuspended()) {
+					synchronized (this) {
+						while (isThreadSuspended())
+							wait();
+					}
+				}
+			} catch (InterruptedException e) {
+				System.out.println("Interruped!");
+			}
+
+			beforeTime = System.currentTimeMillis();
+		}
+	}
+
+	public void setThreadSuspended(boolean threadSuspended) {
+		this.threadSuspended = threadSuspended;
+	}
+
+	public boolean isThreadSuspended() {
+		return threadSuspended;
+	}
+
+
+
+
 
 }
