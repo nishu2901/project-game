@@ -2,21 +2,42 @@ package game;
 
 import javax.swing.JFrame;
 
+import menu.MenuMain;
+
 public class FightingGame extends JFrame {
+	private static final long serialVersionUID = 1L;
+	MenuMain menu;
 
-    public FightingGame() {
+	public FightingGame() {
 
-        add(new Board(1024, 640));
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1024, 640);
-        setLocationRelativeTo(null);
-        setTitle("Fighting Game");
-        setResizable(false);
-        setVisible(true);
-    }
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(1280, 720);
+		setLocationRelativeTo(null);
+		setTitle("Fighting Game");
+		setResizable(false);
 
-    public static void main(String[] args) {
-        new FightingGame();
-    }
+		menu = new MenuMain(1280, 720, this);
+		add(menu);
+		setVisible(true);
+	}
+
+	public static void main(String[] args) {
+		new FightingGame();
+	}
+
+	public void startFight() {
+		menu.setVisible(false);
+		add(new Board(1280, 720));
+		setVisible(false);
+		setVisible(true);
+	}
+
+	public void startNewMenu(MenuMain menu) {
+		add(menu);
+	}
+
+	public void close() {
+		System.exit(0);
+	}
 }

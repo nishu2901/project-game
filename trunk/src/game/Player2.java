@@ -21,7 +21,7 @@ public class Player2 {
 	private int FLOOR;
 
 	public Player2(int width, int height, int FLOOR) {
-		fh.setInputFolder("animation" + File.separator + "p2");
+		fh.setInputFolder("images" + File.separator + "animation" + File.separator + "p2");
 		try {
 			imageList = fh.loadMatchingImages("frame", 1, 100);
 		} catch (Exception e) {
