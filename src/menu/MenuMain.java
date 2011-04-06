@@ -4,19 +4,21 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 import fileHandling.FileHandler;
 import game.FightingGame;
 
+/**
+ * 
+ * @author Richard Jenkin
+ *
+ */
 public class MenuMain extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
 	private FightingGame parent;
@@ -30,7 +32,7 @@ public class MenuMain extends JPanel implements Runnable {
 
 	private boolean threadSuspended;
 
-	private final int DELAY = 50;
+	private final int DELAY = 5;
 
 	public MenuMain(int width, int height, FightingGame parent) {
 		this.parent = parent;
@@ -151,7 +153,7 @@ public class MenuMain extends JPanel implements Runnable {
 	}
 
 	public void cycle() {
-		System.out.println("Cycling");
+		System.out.println("Menu Cycle");
 	}
 
 	public void run() {
