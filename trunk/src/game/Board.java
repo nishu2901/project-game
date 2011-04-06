@@ -5,21 +5,27 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
-
-public class Board extends JPanel implements ActionListener {
+/**
+ * 
+ * @author Richard Jenkin
+ *
+ */
+public class Board extends JPanel implements Runnable {
+	private static final long serialVersionUID = 1L;
 
 	public int FLOOR = 500;
 
-	private Timer timer;
+	private Thread timer;
+	private final int DELAY = 5;
+	private boolean threadSuspended;
+
 	private Player1 p1;
 	private Player2 p2;
 	private int boardWidth, boardHeight;
@@ -37,8 +43,6 @@ public class Board extends JPanel implements ActionListener {
 		p1 = new Player1(width, height, FLOOR);
 		p2 = new Player2(width, height, FLOOR);
 
-		timer = new Timer(5, this);
-		timer.start();
 		boardWidth = width;
 		boardHeight = height;
 
@@ -99,8 +103,62 @@ public class Board extends JPanel implements ActionListener {
 			p2.keyReleased(e);
 			// }
 		}
+	}
+
+	public void addNotify() {
+		super.addNotify();
+		timer = new Thread(this);
+		timer.start();
+	}
+
+	public void cycle() {
+	//	System.out.println("Board2 Cycle");
+		p1.action();
+		p1.move();
+		p2.move();
+	}
+
+	public void run() {
+		long beforeTime, timeDiff, sleep;
+
+		beforeTime = System.currentTimeMillis();
+
+		while (true) {
+			cycle();
+			repaint();
+
+			timeDiff = System.currentTimeMillis() - beforeTime;
+			sleep = DELAY - timeDiff;
+
+			if (sleep < 0) {
+				sleep = 2;
+			}
+			try {
+				Thread.sleep(sleep);
+
+				if (isThreadSuspended()) {
+					synchronized (this) {
+						while (isThreadSuspended())
+							wait();
+					}
+				}
+			} catch (InterruptedException e) {
+				System.out.println("Interrupted!");
+			}
+
+			beforeTime = System.currentTimeMillis();
+		}
+
+	}
 
 
+	public void setThreadSuspended(boolean threadSuspended) {
+		this.threadSuspended = threadSuspended;
+	}
+
+
+	public boolean isThreadSuspended() {
+		return threadSuspended;
 	}
 
 }
