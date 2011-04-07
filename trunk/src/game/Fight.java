@@ -15,15 +15,15 @@ import javax.swing.JPanel;
 /**
  * 
  * @author Richard Jenkin
- *
+ * 
  */
-public class Board extends JPanel implements Runnable {
+public class Fight extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
 
 	public int FLOOR = 500;
 
 	private Thread timer;
-	private final int DELAY = 5;
+	private final int DELAY = 25;
 	private boolean threadSuspended;
 
 	private Player1 p1;
@@ -33,7 +33,7 @@ public class Board extends JPanel implements Runnable {
 	private List<Integer> p1Actions;
 	private List<Integer> p2Actions;
 
-	public Board(int width, int height) {
+	public Fight(int width, int height) {
 
 		addKeyListener(new TAdapter());
 		setFocusable(true);
@@ -67,10 +67,10 @@ public class Board extends JPanel implements Runnable {
 		super.paint(g);
 
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.setColor(Color.CYAN);
-		g2d.fillRect(0, 0, boardWidth, FLOOR - 60);
-		g2d.setColor(Color.GRAY);
-		g2d.fillRect(0, FLOOR - 35, boardWidth, boardHeight);
+		// g2d.setColor(Color.CYAN);
+		// g2d.fillRect(0, 0, boardWidth, FLOOR - 60);
+		// g2d.setColor(Color.GRAY);
+		// g2d.fillRect(0, FLOOR - 35, boardWidth, boardHeight);
 		g2d.drawImage(p1.getImage(), p1.getX(), p1.getY(), this);
 		g2d.drawImage(p2.getImage(), p2.getX(), p2.getY(), this);
 
@@ -112,10 +112,10 @@ public class Board extends JPanel implements Runnable {
 	}
 
 	public void cycle() {
-	//	System.out.println("Board2 Cycle");
+		// System.out.println("Board2 Cycle");
 		p1.action();
 		p1.move();
-		p2.move();
+		p2.update();
 	}
 
 	public void run() {

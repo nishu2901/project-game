@@ -43,7 +43,7 @@ public class FightingGame extends JFrame {
 	public void startFight() {
 		menu.setVisible(false);
 		menu.setThreadSuspended(true);
-		add(new Board(1280, 720));
+		add(new Fight(1280, 720));
 		setVisible(false);
 		setVisible(true);
 	}
