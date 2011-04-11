@@ -8,6 +8,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -17,15 +18,13 @@ import game.FightingGame;
 /**
  * 
  * @author Richard Jenkin
- *
+ * 
  */
 public class MenuMain extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
 	private FightingGame parent;
-	private FileHandler fh;
 	private Thread timer;
-	private MenuButton buttonPlay;
-	private MenuButton buttonExit;
+	private List<MenuButton> menuButtons;
 	private int totalMenuItems;
 	private int selectedMenuItem;
 	private BufferedImage menuBackground;
@@ -34,7 +33,7 @@ public class MenuMain extends JPanel implements Runnable {
 
 	private final int DELAY = 5;
 
-	public MenuMain(int width, int height, FightingGame parent) {
+	public MenuMain(int width, int height, BufferedImage background, List<MenuButton> menuButtons, FightingGame parent) {
 		this.parent = parent;
 
 		addKeyListener(new TAdapter());
@@ -42,19 +41,11 @@ public class MenuMain extends JPanel implements Runnable {
 		setBackground(Color.WHITE);
 		setDoubleBuffered(true);
 
+		this.menuBackground = background;
+		this.menuButtons = menuButtons;
+
 		selectedMenuItem = 0;
 		totalMenuItems = 2;
-
-		fh = new FileHandler();
-		fh.setInputFolder("images" + File.separator + "menu");
-
-		try {
-			buttonPlay = new MenuButton("play", fh.loadMatchingImages("play", 1, 2), 500, 200);
-			buttonExit = new MenuButton("exit", fh.loadMatchingImages("exit", 1, 2), 500, 400);
-			menuBackground = fh.loadMatchingImages("menu", 1, 1).get(0);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		highlightMenuItem(selectedMenuItem);
 	}
@@ -65,8 +56,8 @@ public class MenuMain extends JPanel implements Runnable {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setColor(Color.BLACK);
 		g2d.drawImage(menuBackground, 0, 0, this);
-		g2d.drawImage(buttonPlay.getImage(), buttonPlay.getX(), buttonPlay.getY(), this);
-		g2d.drawImage(buttonExit.getImage(), buttonExit.getX(), buttonExit.getY(), this);
+		g2d.drawImage(menuButtons.get(0).getImage(), menuButtons.get(0).getX(), menuButtons.get(0).getY(), this);
+		g2d.drawImage(menuButtons.get(1).getImage(), menuButtons.get(1).getX(), menuButtons.get(1).getY(), this);
 
 		Toolkit.getDefaultToolkit().sync();
 		g.dispose();
@@ -102,12 +93,12 @@ public class MenuMain extends JPanel implements Runnable {
 	public void highlightMenuItem(int item) {
 		switch (item) {
 		case 0:
-			buttonExit.mouseOut();
-			buttonPlay.mouseOver();
+			menuButtons.get(1).mouseOut();
+			menuButtons.get(0).mouseOver();
 			break;
 		case 1:
-			buttonPlay.mouseOut();
-			buttonExit.mouseOver();
+			menuButtons.get(0).mouseOut();
+			menuButtons.get(1).mouseOver();
 			break;
 		}
 	}
