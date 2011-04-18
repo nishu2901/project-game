@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import character.CharacterState;
+
+
 /**
  * 
  * @author Richard Jenkin
@@ -20,7 +23,7 @@ public class Player3 {
 	private List<Integer> animationsRequested;
 	private boolean animationPlaying;
 	private int animationFrame;
-	private volatile PlayerState state;
+	private volatile CharacterState state;
 	private boolean thistime;
 
 	// Position
@@ -46,7 +49,7 @@ public class Player3 {
 		animationFrame = -1;
 		thistime = true;
 
-		state = PlayerState.STAND;
+		state = CharacterState.STAND;
 
 		x = screenWidth - 100 - playerWidth;
 		y = screenHeight - 100;
@@ -85,12 +88,12 @@ public class Player3 {
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_NUMPAD4:
-			requestAnimation(PlayerState.STAND_FORWARD);
+			requestAnimation(CharacterState.STAND_FORWARD);
 			// chooseImage(50);
 			// dx = -2;
 			break;
 		case KeyEvent.VK_NUMPAD6:
-			requestAnimation(PlayerState.STAND_BACK);
+			requestAnimation(CharacterState.STAND_BACK);
 			// chooseImage(50);
 			// dx = 2;
 			break;
@@ -98,7 +101,7 @@ public class Player3 {
 
 			break;
 		case KeyEvent.VK_NUMPAD2:
-			requestAnimation(PlayerState.CROUCH);
+			requestAnimation(CharacterState.CROUCH);
 			break;
 		case KeyEvent.VK_NUMPAD0:
 			chooseImage(50);
@@ -121,7 +124,7 @@ public class Player3 {
 			// dy = 0;
 			break;
 		case KeyEvent.VK_NUMPAD2:
-			requestAnimation(PlayerState.STAND);
+			requestAnimation(CharacterState.STAND);
 			break;
 		case KeyEvent.VK_NUMPAD0:
 			chooseImage(0);
@@ -142,16 +145,16 @@ public class Player3 {
 				// Set the final resting state
 				switch (state) {
 				case STAND_FORWARD:
-					state = PlayerState.STAND;
+					state = CharacterState.STAND;
 					break;
 				case STAND_BACK:
-					state = PlayerState.STAND;
+					state = CharacterState.STAND;
 					break;
 				case CROUCH_DOWN:
-					state = PlayerState.CROUCH;
+					state = CharacterState.CROUCH;
 					break;
 				case CROUCH_UP:
-					state = PlayerState.STAND;
+					state = CharacterState.STAND;
 					break;
 				}
 				// Reset the start frame
@@ -186,16 +189,16 @@ public class Player3 {
 			// System.out.println("!!!NEW ANIMATION!!!");
 			switch (animationsRequested.get(0)) {
 			case 0:
-				state = PlayerState.STAND_FORWARD;
+				state = CharacterState.STAND_FORWARD;
 				break;
 			case 1:
-				state = PlayerState.STAND_BACK;
+				state = CharacterState.STAND_BACK;
 				break;
 			case 2: // Crouch down
-				state = PlayerState.CROUCH_DOWN;
+				state = CharacterState.CROUCH_DOWN;
 				break;
 			case 3: // Crouch up
-				state = PlayerState.CROUCH_UP;
+				state = CharacterState.CROUCH_UP;
 				break;
 			}
 			// Update Start frame
@@ -217,7 +220,7 @@ public class Player3 {
 		playerHeight = image.getHeight(null);
 	}
 
-	private void requestAnimation(PlayerState animationID) {
+	private void requestAnimation(CharacterState animationID) {
 		switch (animationID) {
 		case STAND:
 			if (animationPlaying) {
@@ -228,7 +231,7 @@ public class Player3 {
 				}
 			} else {
 				// TODO:Replace this with a switch?
-				if (state == PlayerState.STAND) {
+				if (state == CharacterState.STAND) {
 				} else {
 					animationsRequested.add(3);
 				}
@@ -247,7 +250,7 @@ public class Player3 {
 				}
 			} else {
 				// TODO:Replace this with a switch?
-				if (state == PlayerState.STAND_FORWARD) {
+				if (state == CharacterState.STAND_FORWARD) {
 				} else {
 					animationsRequested.add(0);
 				}
@@ -262,13 +265,13 @@ public class Player3 {
 				}
 			} else {
 				// TODO:Replace this with a switch?
-				if (state == PlayerState.STAND_FORWARD) {
+				if (state == CharacterState.STAND_FORWARD) {
 				} else {
 					animationsRequested.add(1);
 				}
 			}
 			break;
-		case STAND_JUMP:
+		case JUMP:
 			break;
 		case CROUCH: // Want to crouch
 			if (animationPlaying) {
@@ -279,7 +282,7 @@ public class Player3 {
 				}
 			} else {
 				// TODO:Replace this with a switch?
-				if (state == PlayerState.CROUCH) {
+				if (state == CharacterState.CROUCH) {
 				} else {
 					animationsRequested.add(2);
 				}
@@ -294,9 +297,5 @@ public class Player3 {
 		case CROUCH_UP:
 			break;
 		}
-	}
-
-	public enum PlayerState {
-		STAND, STAND_PUNCH, STAND_KICK, STAND_FORWARD, STAND_BACK, STAND_JUMP, CROUCH, CROUCH_PUNCH, CROUCH_KICK, CROUCH_DOWN, CROUCH_UP
 	}
 }

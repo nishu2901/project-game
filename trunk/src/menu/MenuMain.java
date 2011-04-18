@@ -1,5 +1,7 @@
 package menu;
 
+import game.MainFightingGame;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -7,13 +9,9 @@ import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.List;
 
 import javax.swing.JPanel;
-
-import fileHandling.FileHandler;
-import game.FightingGame;
 
 /**
  * 
@@ -22,7 +20,7 @@ import game.FightingGame;
  */
 public class MenuMain extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
-	private FightingGame parent;
+	private MainFightingGame parent;
 	private Thread timer;
 	private List<MenuButton> menuButtons;
 	private int totalMenuItems;
@@ -33,7 +31,7 @@ public class MenuMain extends JPanel implements Runnable {
 
 	private final int DELAY = 5;
 
-	public MenuMain(int width, int height, BufferedImage background, List<MenuButton> menuButtons, FightingGame parent) {
+	public MenuMain(int width, int height, BufferedImage background, List<MenuButton> menuButtons, MainFightingGame parent) {
 		this.parent = parent;
 
 		addKeyListener(new TAdapter());

@@ -1,11 +1,11 @@
-package game;
+package player;
 
-public class PlayerOptions {
+public class PlayerInfo {
 	String charName;
 	int player;
 	private int health;
 
-	public PlayerOptions(int player) {
+	public PlayerInfo(int player) {
 		this.charName = "";
 		this.player = player;
 		this.health = 100;

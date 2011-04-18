@@ -7,13 +7,12 @@ import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.List;
 
 import javax.swing.JPanel;
 
 import fileHandling.FileHandler;
-import game.FightingGame;
+import game.MainFightingGame;
 
 /**
  * 
@@ -22,7 +21,7 @@ import game.FightingGame;
  */
 public class MenuCharSelect extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
-	private FightingGame parent;
+	private MainFightingGame parent;
 	private FileHandler fh;
 	private Thread timer;
 	private List<BufferedImage> charButtons;
@@ -40,7 +39,7 @@ public class MenuCharSelect extends JPanel implements Runnable {
 
 	private final int DELAY = 5;
 
-	public MenuCharSelect(int width, int height, FightingGame parent, List<BufferedImage> charButtons, List<BufferedImage> highlights,
+	public MenuCharSelect(int width, int height, MainFightingGame parent, List<BufferedImage> charButtons, List<BufferedImage> highlights,
 			List<BufferedImage> charBig, BufferedImage background) {
 		this.parent = parent;
 		this.charButtons = charButtons;
