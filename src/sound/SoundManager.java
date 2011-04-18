@@ -1,4 +1,4 @@
-package game;
+package sound;
 
 public class SoundManager {
 

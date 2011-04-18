@@ -1,8 +1,5 @@
 package game;
 
-import java.awt.image.BufferedImage;
-import java.util.List;
-
 import javax.swing.JFrame;
 
 import menu.MenuCharSelect;
@@ -14,7 +11,7 @@ import util.GameFileHandler;
  * @author Richard Jenkin
  * 
  */
-public class FightingGame extends JFrame {
+public class MainFightingGame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	GameFileHandler gfh;
 	MenuMain menu;
@@ -22,7 +19,7 @@ public class FightingGame extends JFrame {
 	private static int WIDTH = 1280;
 	private static int HEIGHT = 720;
 
-	public FightingGame() {
+	public MainFightingGame() {
 		// Default things
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(WIDTH, HEIGHT);
@@ -45,7 +42,7 @@ public class FightingGame extends JFrame {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		new FightingGame();
+		new MainFightingGame();
 	}
 
 	/**

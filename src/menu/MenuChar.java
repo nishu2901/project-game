@@ -2,6 +2,12 @@ package menu;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * TODO: Do we need this class? We can now just use an animation
+ * 
+ * @author Richard Jenkin
+ * 
+ */
 public class MenuChar {
 	private String name;
 	private BufferedImage image;
