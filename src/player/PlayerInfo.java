@@ -23,5 +23,12 @@ public class PlayerInfo {
 		return health;
 	}
 
+	public String getCharName() {
+		return charName;
+	}
+
+	public void setCharName(String charName) {
+		this.charName = charName;
+	}
 
 }

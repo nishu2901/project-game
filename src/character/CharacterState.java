@@ -1,14 +1,14 @@
 package character;
 
 /**
- * Enumerator for the state a player's character is in.  
+ * Enumerator for the state a player's character is in.
  * 
  * @author Richard Jenkin
- *
+ * 
  */
 public enum CharacterState {
 	// Standing
-	STAND,	STAND_PUNCH, STAND_KICK, STAND_FORWARD, STAND_BACK, STAND_BLOCK,
+	STAND, STAND_PUNCH, STAND_KICK, STAND_FORWARD, STAND_BACK, STAND_BLOCK,
 	// Jumping
 	JUMP, JUMP_PUNCH, JUMP_KICK,
 	// Crouching
@@ -16,11 +16,11 @@ public enum CharacterState {
 	// Floor
 	FLOOR,
 	// Standing reactions
-	STAND_REACT_FACE, STAND_REACT_FOOT, STAND_REACT_FACE_FALL, STAND_REACT_FOOT_FAL,
+	STAND_REACT_FACE, STAND_REACT_FOOT, STAND_REACT_FACE_FALL, STAND_REACT_FOOT_FALL,
 	// Jumping reactions
 	JUMP_REACT_FALL,
 	// Crouching reactions
 	CROUCH_REACT, CROUCH_REACT_FALL,
 	// Other
-	INTRO, CELEBRATION 
+	INTRO, CELEBRATION;
 }
