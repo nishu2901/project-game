@@ -15,12 +15,10 @@ public class StaticAnimation implements Animation {
 	// Animation
 	private List<BufferedImage> frames;
 	private int currentFrame;
+	private int times;
 
 	// Position
 	private int x, y;
-
-	// Loop
-	private int times;
 
 	/**
 	 * Constructor.
@@ -73,7 +71,6 @@ public class StaticAnimation implements Animation {
 	public BufferedImage getImage() {
 		return frames.get(currentFrame);
 	}
-
 
 	public int getX() {
 		return x;

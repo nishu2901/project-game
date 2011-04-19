@@ -7,7 +7,13 @@ import java.util.List;
 import character.CharacterState;
 
 
-
+/**
+ * An implementation of <code>Animation</code> for characters, which move as
+ * well as animate.
+ * 
+ * @author Richard Jenkin
+ * 
+ */
 public class CharacterAnimation implements Animation {
 	// Labels
 	private CharacterState state;
@@ -63,6 +69,10 @@ public class CharacterAnimation implements Animation {
 			y += movement.get(currentFrame).y;
 		}
 
+	}
+
+	public boolean getAnimationPlaying() {
+		return (times != 0);
 	}
 
 	public BufferedImage getImage() {

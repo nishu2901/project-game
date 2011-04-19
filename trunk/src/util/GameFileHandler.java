@@ -82,7 +82,7 @@ public class GameFileHandler {
 	}
 
 	public List<List<Integer>> loadAnimation(String charName) {
-		csvh.setCSVFolder("images" + File.separator + "animation" + File.separator + charName);
+		csvh.setInputFolder("images" + File.separator + "animation" + File.separator + charName);
 		return csvh.readCSVinteger(charName);
 	}
 }

@@ -1,4 +1,4 @@
-package game;
+package fight;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -13,11 +13,8 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-/**
- * 
- * @author Richard Jenkin
- * 
- */
+import character.Character;
+
 public class Fight extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
 
@@ -27,66 +24,41 @@ public class Fight extends JPanel implements Runnable {
 	private final int DELAY = 25;
 	private boolean threadSuspended;
 
-	private Player1 p1;
-	private Player2 p2;
+	private Character char1;
+	private Character char2;
 
 	private BufferedImage background;
 
-	private List<Integer> p1Actions;
-	private List<Integer> p2Actions;
-
-	public Fight(int width, int height, BufferedImage background) {
+	public Fight(int width, int height, BufferedImage background, Character c1, Character c2) {
 		addKeyListener(new TAdapter());
 		setFocusable(true);
 		setBackground(Color.WHITE);
 		setDoubleBuffered(true);
 
-		p1 = new Player1(width, height, FLOOR);
-		p2 = new Player2(width, height, FLOOR);
-
 		this.background = background;
 
-		p1Actions = new ArrayList<Integer>();
-		p2Actions = new ArrayList<Integer>();
-
-		p1Actions.add(KeyEvent.VK_LEFT);
-		p1Actions.add(KeyEvent.VK_RIGHT);
-		p1Actions.add(KeyEvent.VK_UP);
-		p1Actions.add(KeyEvent.VK_DOWN);
-		p1Actions.add(KeyEvent.VK_SPACE);
-
-		p2Actions.add(KeyEvent.VK_NUMPAD4);
-		p2Actions.add(KeyEvent.VK_NUMPAD6);
-		p2Actions.add(KeyEvent.VK_NUMPAD8);
-		p2Actions.add(KeyEvent.VK_NUMPAD2);
-		p2Actions.add(KeyEvent.VK_NUMPAD0);
+		char1 = c1;
+		char2 = c2;
 	}
-
 
 	public void paint(Graphics g) {
 		super.paint(g);
 
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(background, 0, 0, this);
-		// g2d.setColor(Color.CYAN);
-		// g2d.fillRect(0, 0, boardWidth, FLOOR - 60);
-		// g2d.setColor(Color.GRAY);
-		// g2d.fillRect(0, FLOOR - 35, boardWidth, boardHeight);
-		g2d.drawImage(p1.getImage(), p1.getX(), p1.getY(), this);
-		g2d.drawImage(p2.getImage(), p2.getX(), p2.getY(), this);
+
+		g2d.drawImage(char1.getImage(), char1.getX(), char1.getY(), this);
+		g2d.drawImage(char2.getImage(), char2.getX(), char2.getY(), this);
 
 		Toolkit.getDefaultToolkit().sync();
 		g.dispose();
 	}
 
-
 	public void actionPerformed(ActionEvent e) {
-		p1.action();
-		p1.move();
-		p2.move();
+		char1.move();
+		char2.move();
 		repaint();
 	}
-
 
 	public void addNotify() {
 		super.addNotify();
@@ -95,12 +67,11 @@ public class Fight extends JPanel implements Runnable {
 	}
 
 	public void cycle() {
-		// System.out.println("Board2 Cycle");
-		p1.action();
-		p1.move();
-		p2.update();
+		char1.update();
+		char2.update();
 	}
 
+	@Override
 	public void run() {
 		long beforeTime, timeDiff, sleep;
 
@@ -126,41 +97,28 @@ public class Fight extends JPanel implements Runnable {
 					}
 				}
 			} catch (InterruptedException e) {
-				System.out.println("Interrupted!");
+				System.out.println("Interrupted");
 			}
-
-			beforeTime = System.currentTimeMillis();
 		}
-
 	}
-
 
 	public void setThreadSuspended(boolean threadSuspended) {
 		this.threadSuspended = threadSuspended;
 	}
 
-
 	public boolean isThreadSuspended() {
 		return threadSuspended;
 	}
 
-
 	private class TAdapter extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
-			// if (p1Actions.contains(e)) {
-			p1.keyPressed(e);
-			// } else if (p2Actions.contains(2)) {
-			p2.keyPressed(e);
-			// }
+			char1.keyPressed(e);
+			char2.keyPressed(e);
 		}
-	
+
 		public void keyReleased(KeyEvent e) {
-			// if (p1Actions.contains(e)) {
-			p1.keyReleased(e);
-			// } else if (p2Actions.contains(2)) {
-			p2.keyReleased(e);
-			// }
+			char1.keyReleased(e);
+			char2.keyReleased(e);
 		}
 	}
-
 }
