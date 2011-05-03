@@ -36,11 +36,6 @@ public class MainFightingGame extends JFrame {
 		setVisible(true);
 	}
 
-	/**
-	 * Constructor
-	 * 
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		new MainFightingGame();
 	}
