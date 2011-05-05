@@ -17,6 +17,7 @@ import game.MainFightingGame;
 /**
  * 
  * @author Richard Jenkin
+ * @version 0.5
  * 
  */
 public class MenuCharSelect extends JPanel implements Runnable {

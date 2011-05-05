@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 /**
  * 
  * @author Richard Jenkin
+ * @version 0.5
  * 
  */
 public class Fight extends JPanel implements Runnable {

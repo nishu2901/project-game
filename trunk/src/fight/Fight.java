@@ -15,6 +15,12 @@ import javax.swing.JPanel;
 
 import character.Character;
 
+/**
+ * 
+ * @author Richard Jenkin
+ * @version 0.5
+ *
+ */
 public class Fight extends JPanel implements Runnable {
 	private static final long serialVersionUID = 1L;
 
