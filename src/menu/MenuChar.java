@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
  * TODO: Do we need this class? We can now just use an animation
  * 
  * @author Richard Jenkin
+ * @version 0.5
  * 
  */
 public class MenuChar {

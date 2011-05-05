@@ -8,6 +8,12 @@ import java.util.List;
 
 import fileHandling.FileHandler;
 
+/**
+ * 
+ * @author Richard Jenkin
+ * @version 0.5
+ *
+ */
 public class Player1 {
 	private FileHandler fh = new FileHandler();
 	private List<BufferedImage> imageList;

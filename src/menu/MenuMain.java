@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 /**
  * 
  * @author Richard Jenkin
+ * @version 0.5
  * 
  */
 public class MenuMain extends JPanel implements Runnable {

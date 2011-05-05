@@ -10,6 +10,12 @@ import menu.MenuButton;
 import fileHandling.CSVHandler;
 import fileHandling.FileHandler;
 
+/**
+ * 
+ * @author Richard Jenkin
+ * @version 0.5
+ *
+ */
 public class GameFileHandler {
 	FileHandler fh;
 	CSVHandler csvh;

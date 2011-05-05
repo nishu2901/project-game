@@ -18,6 +18,7 @@ import fileHandling.FileHandler;
  * Provides methods for loading animations from file.
  * 
  * @author Richard Jenkin
+ * @version 0.5
  * 
  */
 public class AnimationIO {

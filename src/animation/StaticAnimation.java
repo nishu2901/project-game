@@ -9,6 +9,7 @@ import java.util.List;
  * move.
  * 
  * @author Richard Jenkin
+ * @version 0.5
  * 
  */
 public class StaticAnimation implements Animation {

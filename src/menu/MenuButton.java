@@ -4,6 +4,12 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
+/**
+ * 
+ * @author Richard Jenkin
+ * @version 0.5
+ *
+ */
 public class MenuButton {
 	private String name;
 	private List<BufferedImage> imageList;

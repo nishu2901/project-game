@@ -13,6 +13,7 @@ import fileHandling.FileHandler;
 /**
  * 
  * @author Richard Jenkin
+ * @version 0.5
  * 
  */
 public class Player2 {
